@@ -5,7 +5,39 @@ import time
 import sys
 from random import randint
 import time
+import pysher
 # from pubnub import Pubnub
+
+
+pusher = pysher.Pusher('490641')
+
+# def  my_func(*args, **kwargs):
+#     print("processing Args:", args)
+#     print("processing Kwargs:", kwargs)
+
+def _callback(m, channel):
+    print(m)
+
+    dc = m['brightness'] * 10
+
+    if m['item'] == 'light-living':
+         living.ChangeDutyCycle(dc)
+
+    elif m['item'] == 'light-porch':
+        porch.ChangeDutyCycle(dc)
+
+    elif m['item'] == 'fireplace':
+        fire.ChangeDutyCycle(dc)
+
+def _error(m):
+    print(m)
+
+def connect_handler(data):
+    channel = pusher.subscribe('plan-pi')
+    channel.bind('new-data', _callback)
+
+pusher.connection.bind('pusher:connection_established', connect_handler)
+pusher.connect()
 
 GPIO.setmode(GPIO.BCM)
 
@@ -36,23 +68,6 @@ fire.start(0)
 # pubnub = Pubnub(publish_key='demo', subscribe_key='demo')
 
 # channel = 'pi-house'
-
-def _callback(m, channel):
-    print(m)
-
-    dc = m['brightness'] * 10
-
-    if m['item'] == 'light-living':
-         living.ChangeDutyCycle(dc)
-
-    elif m['item'] == 'light-porch':
-        porch.ChangeDutyCycle(dc)
-
-    elif m['item'] == 'fireplace':
-        fire.ChangeDutyCycle(dc)
-
-def _error(m):
-  print(m)
 
 # pubnub.subscribe(channels=channel, callback=_callback, error=_error)
 
