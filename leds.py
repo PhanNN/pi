@@ -11,9 +11,9 @@ import pysher
 
 pusher = pysher.Pusher('490641')
 
-# def  my_func(*args, **kwargs):
-#     print("processing Args:", args)
-#     print("processing Kwargs:", kwargs)
+def  my_func(*args, **kwargs):
+    print("processing Args:", args)
+    print("processing Kwargs:", kwargs)
 
 def _callback(m, channel):
     print(m)
@@ -34,7 +34,7 @@ def _error(m):
 
 def connect_handler(data):
     channel = pusher.subscribe('plan-pi')
-    channel.bind('new-data', _callback)
+    channel.bind('new-data', my_func)
 
 pusher.connection.bind('pusher:connection_established', connect_handler)
 pusher.connect()
