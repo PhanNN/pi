@@ -6,6 +6,12 @@ import sys
 from random import randint
 import time
 import pysher
+import logging
+
+root = logging.getLogger()
+root.setLevel(logging.INFO)
+ch = logging.StreamHandler(sys.stdout)
+root.addHandler(ch)
 # from pubnub import Pubnub
 
 
