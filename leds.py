@@ -15,7 +15,7 @@ root.addHandler(ch)
 # from pubnub import Pubnub
 
 
-pusher = pysher.Pusher('3b714b00c26ea6bda765', True, None, None, logging.INFO, True, None, 10, 'ws-ap1.pusher.com')
+pusher = pysher.Pusher('4068d8398911c1ddbbea', True, None, None, logging.INFO, True, None, 10, 'ws-ap1.pusher.com')
 
 def  my_func(*args, **kwargs):
     print("processing Args:", args)
